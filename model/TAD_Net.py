@@ -4,10 +4,8 @@ import torch.nn.functional as F
 import numpy as np
 from scipy.sparse.linalg import eigs
 
-
 # ---------------------- base ----------------------
 def scaled_Laplacian(W):
-    """计算归一化的拉普拉斯矩阵"""
     assert W.shape[0] == W.shape[1]
     D = np.diag(np.sum(W, axis=1))
     L = D - W
@@ -99,7 +97,7 @@ class DyGCN(nn.Module):
 
 
 # ---------------------- core ----------------------
-class ATDGCN_block(nn.Module):
+class TAD_block(nn.Module):
     def __init__(self, DEVICE, in_channels, hidden_layer, hidden_time_layer,
                  time_strides, static_adj, num_of_vertices, windows):
         super().__init__()
@@ -127,7 +125,7 @@ class ATDGCN_block(nn.Module):
         return self.ln(output.permute(0, 3, 2, 1)).permute(0, 2, 3, 1)
 
 
-class ATDGCN_submodule(nn.Module):
+class TAD_submodule(nn.Module):
     def __init__(self, DEVICE, nb_block, in_channels, hidden_layer, hidden_time_layer,
                  time_strides, static_adj, num_for_predict, len_input, num_of_vertices, emb):
         super().__init__()
@@ -142,11 +140,11 @@ class ATDGCN_submodule(nn.Module):
         L_tilde = scaled_Laplacian(static_adj.cpu().numpy())
         self.static_adj = torch.from_numpy(L_tilde).float().to(DEVICE)
         self.BlockList = nn.ModuleList([
-            ATDGCN_block(DEVICE, in_channels, hidden_layer, hidden_time_layer,
+            TAD_block(DEVICE, in_channels, hidden_layer, hidden_time_layer,
                           time_strides, self.static_adj, num_of_vertices, len_input)
         ])
         self.BlockList.extend([
-            ATDGCN_block(DEVICE, hidden_time_layer, hidden_layer, hidden_time_layer,
+            TAD_block(DEVICE, hidden_time_layer, hidden_layer, hidden_time_layer,
                           1, self.static_adj, num_of_vertices, len_input // time_strides)
             for _ in range(nb_block - 1)
         ])
@@ -182,10 +180,10 @@ class ATDGCN_submodule(nn.Module):
 
 
 # ---------------------- main ----------------------
-def ATDGCN(DEVICE, nb_block, in_channels, hidden_layer, hidden_time_layer,
+def TAD_Net(DEVICE, nb_block, in_channels, hidden_layer, hidden_time_layer,
                time_strides, adj_mx, num_for_predict, len_input, num_of_vertices, emb):
     static_adj = torch.from_numpy(adj_mx).float().to(DEVICE)
-    model = ATDGCN_submodule(DEVICE, nb_block, in_channels, hidden_layer,
+    model = TAD_submodule(DEVICE, nb_block, in_channels, hidden_layer,
                               hidden_time_layer, time_strides, static_adj,
                               num_for_predict, len_input, num_of_vertices, emb)
     for p in model.parameters():

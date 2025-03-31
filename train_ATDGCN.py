@@ -3,9 +3,8 @@ import yaml
 import time
 import torch
 import datetime
-import numpy as np
 from torch import optim
-from model.ATDGCN import ATDGCN
+from model.TAD_Net import TAD_Net
 from numpy import load
 from lib.utils import (
     prepare_spatiotemporal_data,
@@ -89,7 +88,7 @@ def main(_Config):
     )
     
     # Initialize model
-    model = ATDGCN(
+    model = TAD_Net(
         DEVICE=torch.device(config['train']['device']),
         nb_block=config['model']['num_blocks'],
         in_channels=config['model']['in_channels'] + config['model']['num_embeddings']*config['model']['embedding_dim'],

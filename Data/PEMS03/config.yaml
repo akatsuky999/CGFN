@@ -1,18 +1,18 @@
 # PEMS04
 data:
-  graph_signal_file: "Data/PEMS04/PEMS08.npz"
-  adj_file: "Data/PEMS04/PEMS08.csv"
-  dataset_id: "PEMS04_w0_d0_h1"
+  graph_signal_file: "Data/PEMS03/PEMS03.npz"
+  adj_file: "Data/PEMS03/PEMS03.csv"
+  dataset_id: "PEMS03_w0_d0_h1_I12_P6"
   save_dir: "result"
   log_dir: "training_logs"
-  num_of_node: 208
+  num_of_node: 358
 
 model:
   num_blocks: 3
   in_channels: 1
   hidden_size: 64
   time_hidden_size: 64
-  time_strides: 4
+  time_strides: 1
   embedding_dim: 16
   num_embeddings: 3
 
@@ -20,8 +20,9 @@ train:
   device: "cuda:0"
   batch_size: 32
   seq_len: 12
-  pred_steps: 12
+  pred_steps: 6
   learning_rate: 0.001
+  Reduction_step: 8
   epochs: 100
   patience: 10
   delta: 0.001

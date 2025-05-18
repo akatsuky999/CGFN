@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df48e54a-f7fc-41e9-8c57-ff2be0ea6821" name="Changes" comment="Add a replica">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ATDGCN.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+    <list default="true" id="df48e54a-f7fc-41e9-8c57-ff2be0ea6821" name="Changes" comment="Added pictures">
+      <change beforePath="$PROJECT_DIR$/Predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/Predict.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +166,28 @@
       <option name="project" value="LOCAL" />
       <updated>1747562572260</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Update Configuration">
+      <created>1747562870643</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1747562870643</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update Configuration">
+      <created>1747562878727</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1747562878727</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added pictures">
+      <created>1747562898655</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1747562898655</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -197,6 +212,8 @@
     <MESSAGE value="Added functionality" />
     <MESSAGE value="Update the configuration file" />
     <MESSAGE value="Add a replica" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add a replica" />
+    <MESSAGE value="Update Configuration" />
+    <MESSAGE value="Added pictures" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added pictures" />
   </component>
 </project>

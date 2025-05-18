@@ -115,7 +115,7 @@ def load_model_and_calculate_loss(config, model_path, start_percentage=10, end_p
     plt.legend(loc='upper right')
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.tight_layout()
-    plt.savefig('true_vs_predicted.png')
+    plt.savefig('predicted.png')
     plt.show()
 
     return val_rmse, val_mae, val_mape
@@ -123,7 +123,7 @@ def load_model_and_calculate_loss(config, model_path, start_percentage=10, end_p
 
 if __name__ == "__main__":
     config = load_config("Data/PEMS04/config.yaml")
-    model_path = os.path.join(config['data']['save_dir'], "BEST_TADNet_202504091133.pth")
+    model_path = os.path.join(config['data']['save_dir'], "BEST_CGFN_202504091133.pth")
     rmse, mae, mape = load_model_and_calculate_loss(config, model_path, start_percentage=3, end_percentage=3.0025)
     print(f"Validation RMSE: {rmse:.4f}")
     print(f"Validation MAE: {mae:.4f}")

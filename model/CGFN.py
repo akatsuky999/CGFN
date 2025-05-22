@@ -102,14 +102,14 @@ class DyGCN(nn.Module):
 
 # ---------------------- core ----------------------
 class GroupDualGTU(nn.Module):
-    def __init__(self, in_channels, time_strides, kernel_size, groups=4,
+    def __init__(self, in_channels, out_channels, time_strides, kernel_size, groups=4,
                  act_p_type='mish', act_q_type='hardtanh'):
         super().__init__()
         assert in_channels % groups == 0, "The number of channels must be divisible by the number of groups."
 
         self.conv = nn.Conv2d(
             in_channels,
-            2 * in_channels,
+            2 * out_channels,
             kernel_size=(1, kernel_size),
             stride=(1, time_strides),
             groups=groups,
@@ -117,8 +117,8 @@ class GroupDualGTU(nn.Module):
 
         self.act_p = self._select_activation(act_p_type)
         self.act_q = self._select_activation(act_q_type, is_gate=True)
-        self.gn_p = nn.GroupNorm(groups, in_channels)
-        self.gn_q = nn.GroupNorm(groups, in_channels)
+        self.gn_p = nn.GroupNorm(groups, out_channels)
+        self.gn_q = nn.GroupNorm(groups, out_channels)
 
     def _select_activation(self, act_type, is_gate=False):
         if is_gate:
@@ -156,10 +156,10 @@ class CGFN_block(nn.Module):
                            num_nodes=num_of_vertices,
                            windows=windows)
         # 定义不同卷积核大小的 GTU 层
-        self.gtu3 = GroupDualGTU(hidden_time_layer, time_strides, 3)
-        self.gtu5 = GroupDualGTU(hidden_time_layer, time_strides, 5)
-        self.gtu7 = GroupDualGTU(hidden_time_layer, time_strides, 7)
-        self.gtu9 = GroupDualGTU(hidden_time_layer, time_strides, 9)
+        self.gtu3 = GroupDualGTU(hidden_layer, hidden_time_layer, time_strides, 3)
+        self.gtu5 = GroupDualGTU(hidden_layer, hidden_time_layer, time_strides, 5)
+        self.gtu7 = GroupDualGTU(hidden_layer, hidden_time_layer, time_strides, 7)
+        self.gtu9 = GroupDualGTU(hidden_layer, hidden_time_layer, time_strides, 9)
 
         self.fcmy = nn.Sequential(
             nn.Linear(4 * windows - 20, windows),

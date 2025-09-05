@@ -17,7 +17,7 @@ model:
   num_embeddings: 3
 
 train:
-  device: "cuda:0"
+  device: "cuda:1"
   batch_size: 32
   seq_len: 12
   pred_steps: 12

@@ -155,7 +155,7 @@ class CGFN_block(nn.Module):
                            static_adj=static_adj,
                            num_nodes=num_of_vertices,
                            windows=windows)
-        # 定义不同卷积核大小的 GTU 层
+        # 4 horizon GTU (k size)
         self.gtu3 = GroupDualGTU(hidden_layer, hidden_time_layer, time_strides, 3)
         self.gtu5 = GroupDualGTU(hidden_layer, hidden_time_layer, time_strides, 5)
         self.gtu7 = GroupDualGTU(hidden_layer, hidden_time_layer, time_strides, 7)
